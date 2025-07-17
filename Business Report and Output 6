@@ -1,0 +1,19 @@
+- Group customers into age ranges (e.g., <25, 25–40, 40+)
+- Measure sales volume and value by age group
+
+#Output
+
+SELECT 
+CASE
+WHEN age BETWEEN 18 AND 25 THEN '18-25'
+WHEN age BETWEEN 26 AND 40 THEN '26-40'
+WHEN age BETWEEN 41 AND 60 THEN '41-60'
+WHEN age IS NULL THEN 'Unkonwn'
+
+ELSE '60+'
+END AS age_wise, 
+COUNT(*)  AS transactions,
+SUM(total_sale) AS sales_by_age
+FROM new_schema.retail_data
+GROUP BY age_wise 
+ORDER BY age_wise ASC;
