@@ -1,0 +1,11 @@
+Customer who haven't purchased in last 6-9 months
+
+#Output
+
+SELECT 
+customer_id, 
+MAX(DATE_FORMAT(sale_date, '%d-%m-%y')) AS  last_sale_date
+FROM new_schema.retail_data
+GROUP BY customer_id
+HAVING last_sale_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 9 MONTH)
+AND DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
