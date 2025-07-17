@@ -1,0 +1,10 @@
+Rank customer based on sales
+
+#Output
+
+SELECT
+customer_id,
+SUM(total_sale) AS total_sales,
+RANK() OVER( ORDER BY SUM(total_sale) DESC)  AS ranks
+FROM new_schema.retail_data
+GROUP BY customer_id
