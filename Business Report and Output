@@ -1,0 +1,19 @@
+Compare total revenue from new vs. repeat customers
+
+#Output
+
+SELECT 
+CASE
+WHEN customer_id IN (
+SELECT customer_id
+FROM new_schema.retail_data
+GROUP BY customer_id
+HAVING COUNT(*) >2
+)
+THEN 'Repeat_customer'
+ELSE "Non_repeat_customer"
+END AS customer_type,
+SUM(total_sale) AS total_sales
+
+FROM new_schema.retail_data
+GROUP BY customer_type
